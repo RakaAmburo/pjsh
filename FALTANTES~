@@ -1,0 +1,63 @@
+* MAVEN
+buscar lo que investigue de seguridad para agregarlo
+manejar niveles de usuario mostrar o no mostrar cosas
+security monitoring y db y logear usuario entrando
+rever lo de los annotations service con varias implementaciones
+finalmente hacer una lista para presentar y practicar una presentacion con share my scrin
+manejar el error de paises json
+errores en mvc
+tambine manejar errores en rest y webser
+
+* SEGURIDAD PARA SERVICIOS Y CLIENTES HTTPS Y/O PASSWORD 3
+
+* JENKINS 4
+* jpa 3
+organizar los test serparar los swit y antizar para ostrarlos por guev
+
+
+
+Run with 22, 1521 and 8080 ports opened:  docker run -d -p 49160:22 -p 49161:1521 -p 49162:8080 alexeiled/docker-oracle-xe-11g 
+
+Connect database with following setting:  hostname: localhost port: 49161 sid: xe username: system password: oracle 
+
+Password for SYS  oracle 
+
+Connect to Oracle Application Express web management console with following settings:  url: http://localhost:49162/apex workspace: INTERNAL user: ADMIN password: oracle 
+
+Login by SSH  ssh root@localhost -p 49160 password: admin
+
+
+probar si funciona borrar usuarios borra roles
+igualru user role con query
+en chrome double submittion token solucionar ver con filtro de seguridad y anticache
+
+
+Recommendations:
+
+It does not usually make sense to enable cascade on a <many-to-one> or <many-to-many> association. Cascade is often useful for <one-to-one> and <one-to-many> associations.
+If the child object's lifespan is bounded by the lifespan of the parent object, make it a life cycle object by specifying cascade="all,delete-orphan".
+Otherwise, you might not need cascade at all. But if you think that you will often be working with the parent and children together in the same transaction, and you want to save yourself some typing, consider using cascade="persist,merge,save-update".
+
+
+
+----------https en rest y webserv---------
+checkeo de codigo buscar uno gratuito
+maven
+----------tool para encrytpar automaticamente en properties.----------
+generar war y ear para por lo menos tres servers
+jpa
+----------logear xml de websev y rest
+implementar saml
+couchbase
+----------mocks---------
+automatizar todo
+consolidar nombres
+----------mvc que funque----------
+mejorar rest/webs nombres y factorys de los secure
+impmentar rest/webs en web
+aclara para que proyecto carga cada jar
+implementar status check
+consolidar selenium para mvc y web
+no funca utimo delete y delete uno vacio
+
+

@@ -1,0 +1,25 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2016-06-09 15:13:59 #1 store] 
+Database '/home/pablo.paparini/Dropbox/REPOSITORIOS/PJSH/lib/dtup/db/guests.odb' is opened by 9025@AR-IT00301
+
+[2016-06-09 15:14:00 #2 type.registry] 
+New type guest.Guest
+
+[2016-06-09 15:14:00 #3 type] 
+Type guest.Guest is not enhanced.
+
+[2016-06-09 15:24:51 #4 store] 
+Database '/home/pablo.paparini/Dropbox/REPOSITORIOS/PJSH/lib/dtup/db/guests.odb' is closed by 9025@AR-IT00301
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2016-06-09 15:52:58 #1 store] 
+Database '/home/pablo.paparini/Dropbox/REPOSITORIOS/PJSH/lib/dtup/db/guests.odb' is opened by 11129@AR-IT00301
+
+[2016-06-09 15:52:58 #2 type] 
+Type guest.Guest is not enhanced.
+
+[2016-06-09 16:31:00 #3 store] 
+Database '/home/pablo.paparini/Dropbox/REPOSITORIOS/PJSH/lib/dtup/db/guests.odb' is closed by 11129@AR-IT00301
+

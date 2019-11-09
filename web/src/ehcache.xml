@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<ehcache>
+    <diskStore path="java.io.tmpdir"/>
+    
+    <defaultCache
+            maxEntriesLocalHeap="1000"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="300"
+           memoryStoreEvictionPolicy="LRU">
+    </defaultCache>
+    
+    <cache name="paises"
+           maxEntriesLocalHeap="1000"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="300"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="none"/>  
+     </cache>
+     
+     <cache name="languages"
+           maxEntriesLocalHeap="1000"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="300"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="none"/>  
+     </cache>
+     
+     <cache name="prgmLanguajes"
+           maxEntriesLocalHeap="1000"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="300"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="none"/>  
+     </cache>
+     
+     <!-- not in operation -->
+     <cache name="ar.project.ent.entities.area.Country"
+           maxEntriesLocalHeap="1000"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="300"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="none"/>  
+     </cache>
+     
+</ehcache>

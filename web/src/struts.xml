@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.objectFactory"
+		value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.action.excludePattern" value="/services/.*" />
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+	<constant name="struts.action.extension" value="," />	
+
+	<!--
+		Agregado para que tiles tome correctamente los @Result..type="tiles"
+	-->
+	<constant name="struts.convention.default.parent.package"
+		value="default" />
+
+	<!-- Default package para definiciones generales -->
+	<package name="default" namespace="/" extends="struts-default">
+
+
+		<default-action-ref name="index" />
+
+
+		<global-results>
+			<result name="error">/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+
+	</package>
+
+	
+
+	<!-- include file="examples.xml" /-->
+
+	<!-- Add packages here -->
+</struts>

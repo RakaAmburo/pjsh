@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="  
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd  
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd  
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd  
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="ar.project" />
+	<tx:annotation-driven transaction-manager="txnManager" />
+
+	<!-- JASYPT CONFIGURATION -->
+	<import resource="classpath:secure.xml"/>
+    <bean id="configurationEncryptor"
+        class="ar.project.secure.ExternalCipherTextEncryptor" >
+        <property name="cipherProvider" ref="propertiesCipherProvider"/>
+    </bean>
+	
+	<bean id="propertyConfigurer"
+		class="org.jasypt.spring3.properties.EncryptablePropertyPlaceholderConfigurer">
+		<constructor-arg ref="configurationEncryptor" />
+		<property name="locations">
+			<list>
+				<value>classpath:general.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- declare the MessageSource bean -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="cacheSeconds" value="3" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:ApplicationResources</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+    <bean id="springDriver" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName"><value>${data.source.driver}</value></property>
+        <property name="url"><value>${database.url}</value></property>
+        <property name="username"><value>${database.username}</value></property>
+        <property name="password"><value>${database.password}</value></property> 
+    </bean>
+    
+     <bean id="boneDriver" class="com.jolbox.bonecp.BoneCPDataSource"
+    			lazy-init="true" destroy-method="close">
+       <property name="driverClass" value="com.mysql.jdbc.Driver" />
+       <property name="jdbcUrl" value="${database.url}" />
+       <property name="username" value="${database.username}"/>
+       <property name="password" value="${database.password}"/>
+       
+       <property name="maxConnectionsPerPartition" value="30"/>
+       <property name="minConnectionsPerPartition" value="10"/>
+       <property name="idleMaxAgeInMinutes" value="5"/>
+	   <property name="idleConnectionTestPeriodInMinutes" value="1"/>
+       <property name="partitionCount" value="3"/>
+	   <property name="acquireIncrement" value="5"/>
+	   <property name="statementsCacheSize" value="30"/>
+	   <property name="releaseHelperThreads" value="3"/>
+    </bean>
+    
+    <bean id="c3poDriver" class = "com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+       <property name="driverClass" value="com.mysql.jdbc.Driver" />
+       <property name="jdbcUrl" value="${database.url}" />
+       <property name="user" value="${database.username}"/>
+       <property name="password" value="${database.password}"/> 
+
+        <!-- these are C3P0 properties -->
+        <property name="acquireIncrement" value="5" />
+        <property name="minPoolSize" value="10" />
+        <property name="maxPoolSize" value="124" />
+        <property name="maxIdleTime" value="5" />
+    </bean>
+    
+    <bean id="dynamicDataSource" class ="ar.project.persist.dynConfigs.DynamicDataSource"> 
+	    <property name="targetDataSources">
+	    	<map key-type = "ar.project.persist.dynConfigs.DataSourceType"> 
+	    		<entry key = "springDriver" value-ref = "springDriver"/> 
+	    		<entry key = "boneDriver" value-ref = "boneDriver"/> 
+	    		<entry key = "c3poDriver" value-ref = "c3poDriver"/>
+	    		<entry key = "sqliteDynDataSrc" value-ref = "sqliteDynDataSrc"/>
+	    	</map> 
+	    </property> 
+	    <property name = "defaultTargetDataSource" ref = "${data.source}"/> 
+    </bean>       
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dynamicDataSource" />
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+		 <property name="hibernateProperties">
+	        <props>
+	            <prop key="hibernate.dialect">${sql.dialect}</prop>
+	            <prop key="hibernate.show_sql">${show.sql}</prop>
+	        </props>
+	     </property>
+		<property name="packagesToScan">
+			<list>
+				<value>ar.project.ent.entities</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="txnManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    
+
+	<!--IMPORTANTE NO MODIFICAR NI CAMBIAR EL TAG DE ABAJO-->
+	<!--import resource="webServAppCtxtBeans.xml"/-->
+
+
+</beans> 

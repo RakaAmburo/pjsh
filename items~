@@ -1,0 +1,28 @@
+* Describir las capas web serv dao ent restx2 webservx2
+* Describir tecnologias struts2, mvc, spring, hibernate and jpa, jersey, apache cxf
+* Patron de dao con generics
+* Todo con anotation y custom anotations
+* Mostrar el application context y describirlo (ehcache internationalization) charencoder
+* Como genero los clientes webser y rest y expongo servicios
+* Deployado en tomcat 6 7 8, glasfish, webphere
+* Describir proyecto webTest con selenium para los tres exploradores y testeos concurrentes en background
+* Front end jquery ajax(struts2) js por separado nada de js en los html, bootstrap y fontawesome
+* Filtros en general, seguridad xss, timeout
+
+
+
+
+libs in tomcat lib
+spring-web-3.2.9.RELEASE.jar
+spring-core-3.2.9.RELEASE.jar
+spring-context-3.2.9.RELEASE.jar
+spring-beans-3.2.9.RELEASE.jar
+spring-security-web-3.2.4.RELEASE.jar
+spring-security-core-3.2.4.RELEASE.jar
+log4j-1.2.16.jar
+commons-logging-1.1.1.jar
+
+
+javax.ws.rs-api-2.0.jar
+spring-context-support-3.2.9.RELEASE.jar
+spring-security-web-3.2.4.RELEASE.jar

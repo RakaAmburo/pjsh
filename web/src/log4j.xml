@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
+      <layout class="org.apache.log4j.PatternLayout">
+         <param name="ConversionPattern" value="%d{dd MMM yyyy HH:mm:ss} %5p %c{1} - %m%n"/>
+      </layout>
+    </appender>
+    
+    <appender name="webAct" class="org.apache.log4j.RollingFileAppender">
+		<param name="maxFileSize" value="100KB" />
+		<param name="maxBackupIndex" value="5" />
+		<param name="File" value="${env.home}/web.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd-MMM-yyyy HH:mm:ss,SSS} %5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="webPersist" class="org.apache.log4j.RollingFileAppender">
+		<param name="maxFileSize" value="100KB" />
+		<param name="maxBackupIndex" value="5" />
+		<param name="File" value="${env.home}/persist.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd-MMM-yyyy HH:mm:ss,SSS} %5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="webServ" class="org.apache.log4j.RollingFileAppender">
+		<param name="maxFileSize" value="500KB" />
+		<param name="maxBackupIndex" value="5" />
+		<param name="File" value="${env.home}/serv.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd-MMM-yyyy HH:mm:ss,SSS} %5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="wClie" class="org.apache.log4j.RollingFileAppender">
+		<param name="maxFileSize" value="100KB" />
+		<param name="maxBackupIndex" value="5" />
+		<param name="File" value="${env.home}/wclie.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd-MMM-yyyy HH:mm:ss,SSS} %5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="restCli" class="org.apache.log4j.RollingFileAppender">
+		<param name="maxFileSize" value="100KB" />
+		<param name="maxBackupIndex" value="5" />
+		<param name="File" value="${env.home}/restClie.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd-MMM-yyyy HH:mm:ss,SSS} %5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="rootAppender" class="org.apache.log4j.RollingFileAppender">
+		<param name="maxFileSize" value="100KB" />
+		<param name="maxBackupIndex" value="5" />
+		<param name="File" value="${env.home}/root.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd-MMM-yyyy HH:mm:ss,SSS} %5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+   
+    <logger name="ar.project.web" additivity="false">
+	    <level value="${log.level}"></level>
+		<appender-ref ref="webAct" />
+	</logger>
+	
+	<logger name="ar.project.services" additivity="false">
+	    <level value="${log.level}"></level>
+		<appender-ref ref="webServ" />
+	</logger>
+	
+	<logger name="ar.project.persist" additivity="false">
+	    <level value="${log.level}"></level>
+		<appender-ref ref="webPersist" />
+	</logger>
+	
+	<logger name="ar.project.wclie" additivity="false">
+	    <level value="${log.level}"></level>
+		<appender-ref ref="wClie" />
+	</logger>
+	
+	<logger name="ar.project.restCli" additivity="false">
+	    <level value="${log.level}"></level>
+		<appender-ref ref="restCli" />
+	</logger>
+
+	<root>
+		<priority value="INFO" />
+		<appender-ref ref="rootAppender" />
+	</root>
+
+</log4j:configuration>
